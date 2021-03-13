@@ -8,11 +8,16 @@ import android.util.Log;
 
 import java.util.Locale;
 
-
+/**
+ * this is text to speech class.
+ * @author Noa Fatael
+ */
 public class TTS_Manager {
     TextToSpeech tts;
     AudioManager audioManager;
-
+    /**
+     * TTS_Manager constructor
+     */
     public TTS_Manager()
     {
         if(MainActivity.getContext() != null)
@@ -27,7 +32,11 @@ public class TTS_Manager {
             });
         }
     }
-    // To convert text to speech
+    /**
+     * This function will convert text to speech.
+     * @param text- string to say
+     * @return if succeed
+     */
     public boolean talk(String text){
         audioManager =  (AudioManager) MainActivity.getContext().getSystemService(Context.AUDIO_SERVICE);
         int volume = audioManager.getStreamVolume(AudioManager.STREAM_ALARM);
