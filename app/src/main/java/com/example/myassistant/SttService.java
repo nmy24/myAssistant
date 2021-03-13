@@ -72,6 +72,7 @@ public class SttService extends Service {
                 //SharedPreferences pref = getApplicationContext().getSharedPreferences(MainActivity.FILENAME, 0); // 0 - for private mode
                 //String name = pref.getString("assistantName", null); // getting String
                 speechRecognizer.startListening(speechRecognizerIntent);
+
             }
             @Override
             public void onPartialResults(Bundle partialResults) {}

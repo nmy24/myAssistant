@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static Context main_activity_context;
     private static final Integer RecordAudioRequestCode = 1;
     public static final String FILENAME = "MyPref";
-    private static TTS_Manager tts;
+    public static TTS_Manager tts;
     private static ArrayList<Integer> songs;
     private static Intent musicIntent;
 
