@@ -9,7 +9,11 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnStart, btnStop;
-    private Context main_activity_context;
+    private static Context main_activity_context;
+
+    public static Context getContext() {
+        return main_activity_context;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnStop = (Button) findViewById(R.id.btnStop);
         btnStart.setOnClickListener(this);
         btnStop.setOnClickListener(this);
+
+        main_activity_context = this;
 
     }
 
