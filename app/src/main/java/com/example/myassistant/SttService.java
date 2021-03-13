@@ -2,6 +2,7 @@ package com.example.myassistant;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -15,12 +16,20 @@ import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+ * this the speech to text service.
+ * @author Noa Fatael
+ */
 public class SttService extends Service {
 
     public static SpeechRecognizer speechRecognizer;
     static Intent speechRecognizerIntent = null;
 
-    //create service
+    /**
+     * This function will create the sevice.
+     * @param
+     * @return
+     */
     @Override
     public void onCreate() {
         super.onCreate();
@@ -30,8 +39,11 @@ public class SttService extends Service {
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(MainActivity.getContext());
         speechRecognizer.startListening(speechRecognizerIntent);
     }
-
-    //start service
+    /**
+     * This function will start the sevice.
+     * @param intent, flag, startId
+     * @return integer
+     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         speechRecognizer.setRecognitionListener(new RecognitionListener() {
@@ -69,7 +81,11 @@ public class SttService extends Service {
         return START_STICKY;
     }
 
-    //destroy service
+    /**
+     * This function will destroy the sevice.
+     * @param
+     * @return
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();

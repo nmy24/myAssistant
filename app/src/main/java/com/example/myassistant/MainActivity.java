@@ -18,20 +18,24 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * this is the MainActivity class.
+ * @author Noa Fatael
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnStart, btnStop;
     private static Context main_activity_context;
     private static final Integer RecordAudioRequestCode = 1;
-    private static final String FILENAME = "MyPref";
+    public static final String FILENAME = "MyPref";
     private static TTS_Manager tts;
     private static ArrayList<Integer> songs;
     private static Intent musicIntent;
 
-
-    public static Context getContext() {
-        return main_activity_context;
-    }
-
+    /**
+     * This is onCreate function.
+     * @param
+     * @return
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //store assistant name in Shared Preferences
         SharedPreferences pref = getApplicationContext().getSharedPreferences(FILENAME, 0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("assistantName", "Siri"); // Storing string
+        editor.putString("assistantName", "Maya"); // Storing string
         editor.commit(); // commit changes
         tts = new TTS_Manager();
 
@@ -70,7 +74,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
+    /**
+     * This is onClick function.
+     * btnStart => start to listen
+     * btnStop => stop to listen
+     * @param
+     * @return
+     */
     @Override
     public void onClick(View v) {
         if(v == btnStart)
@@ -87,14 +97,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-    //check if permission granted
+    /**
+     * This function will return the context.
+     * @param
+     * @return context
+     */
+    public static Context getContext() {
+        return main_activity_context;
+    }
+    /**
+     * This function will check if permission granted.
+     * @param
+     * @return
+     */
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE},RecordAudioRequestCode);
         }
     }
-
-    //ask for permission
+    /**
+     * This function will ask for permission.
+     * @param requestCode, permissions, grantResults
+     * @return
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
