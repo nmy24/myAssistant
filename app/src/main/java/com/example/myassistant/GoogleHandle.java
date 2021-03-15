@@ -5,7 +5,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.Toast;
 
+/**
+ * this class handles all the functions related the use of google.
+ * @author Noa Fatael
+ */
 public class GoogleHandle {
+    /**
+     * This function will search a Google Query.
+     * @param Query
+     * @return
+     */
     public static void searchGoogleQuery(String query)
     {
         Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
@@ -13,14 +22,22 @@ public class GoogleHandle {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         MainActivity.getContext().startActivity(intent);
     }
-
+    /**
+     * This function will play a song from youtube.
+     * @param Query
+     * @return
+     */
     public static void playFromYoutube(String query)
     {
         Intent intent = new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.youtube.com/search?q="+query));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         MainActivity.getContext().startActivity(intent);
     }
-
+    /**
+     * This function will send a mail.
+     * @param 
+     * @return
+     */
     public static void sendEmail()
     {
         String[] to = {""};
