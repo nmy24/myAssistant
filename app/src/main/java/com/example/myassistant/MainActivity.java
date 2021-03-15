@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final Integer RecordAudioRequestCode = 1;
     public static final String FILENAME = "MyPref";
     public static TTS_Manager tts;
-    private static ArrayList<Integer> songs;
-    private static Intent musicIntent;
+    public static ArrayList<Integer> songs;
+    public static Intent musicIntent;
 
     /**
      * This is onCreate function.
@@ -48,6 +48,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnStop.setOnClickListener(this);
 
         main_activity_context = this;
+
+        //init songs
+        songs = new ArrayList<Integer>();
+        songs.add(R.raw.a);
+        songs.add(R.raw.b);
+        songs.add(R.raw.c);
+        songs.add(R.raw.d);
+        songs.add(R.raw.e);
+        songs.add(R.raw.f);
+        songs.add(R.raw.g);
 
         //store assistant name in Shared Preferences
         SharedPreferences pref = getApplicationContext().getSharedPreferences(FILENAME, 0); // 0 - for private mode

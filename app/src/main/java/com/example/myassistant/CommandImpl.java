@@ -1,5 +1,6 @@
 package com.example.myassistant;
 
+import android.content.Intent;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -56,6 +57,17 @@ public class CommandImpl {
         else if(GoogleHandle.isCammandSendEmail(command))
         {
             GoogleHandle.sendEmail();
+        }
+        else if(command.contains("music") && command.contains("play"))
+        {
+            //start sount track in background:
+            MainActivity.musicIntent = new Intent(MainActivity.getContext(),MusicService.class);
+            MainActivity.getContext().startService(MainActivity.musicIntent);
+
+        }
+        else if(command.contains("music") && command.contains("stop"))
+        {
+            MainActivity.getContext().stopService(MainActivity.musicIntent);
         }
 
     }
