@@ -44,6 +44,19 @@ public class CommandImpl {
                 }
             }
         }
+        else if(GoogleHandle.isCammandSearchGoogleQuery(command))
+        {
+            MainActivity.tts.talk("searching");
+            GoogleHandle.searchGoogleQuery(command.substring(("search in google ").length(), command.length()));
+        }
+        else if(GoogleHandle.isCammandPlayFromYoutube(command))
+        {
+            GoogleHandle.playFromYoutube(command.substring(("search in youtube ").length(), command.length()));
+        }
+        else if(GoogleHandle.isCammandSendEmail(command))
+        {
+            GoogleHandle.sendEmail();
+        }
 
     }
 }

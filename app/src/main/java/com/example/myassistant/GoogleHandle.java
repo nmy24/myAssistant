@@ -35,7 +35,7 @@ public class GoogleHandle {
     }
     /**
      * This function will send a mail.
-     * @param 
+     * @param
      * @return
      */
     public static void sendEmail()
@@ -54,5 +54,29 @@ public class GoogleHandle {
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(MainActivity.getContext(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
+    }
+    /**
+     * This function return if this command fits this class.
+     * @param command
+     * @return return if this command fits this class.
+     */
+    public static boolean isCammandSearchGoogleQuery(String command){
+        return (command.contains("send") && command.contains("email"));
+    }
+    /**
+     * This function return if this command fits this class.
+     * @param command
+     * @return return if this command fits this class.
+     */
+    public static boolean isCammandPlayFromYoutube(String command){
+        return (command.contains("play") && command.contains("youtube"));
+    }
+    /**
+     * This function return if this command fits this class.
+     * @param command
+     * @return return if this command fits this class.
+     */
+    public static boolean isCammandSendEmail(String command){
+        return (command.contains("send") && command.contains("email"));
     }
 }
