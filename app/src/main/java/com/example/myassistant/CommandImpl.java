@@ -2,6 +2,7 @@ package com.example.myassistant;
 
 import android.content.Intent;
 import android.os.Build;
+import android.telephony.SmsManager;
 
 import androidx.annotation.RequiresApi;
 
@@ -10,7 +11,6 @@ import androidx.annotation.RequiresApi;
  * @author Noa Fatael
  */
 public class CommandImpl {
-
     /**
      * This function will call the wanted command
      * @param command
@@ -68,6 +68,11 @@ public class CommandImpl {
         else if(command.contains("music") && command.contains("stop"))
         {
             MainActivity.getContext().stopService(MainActivity.musicIntent);
+        }
+        else if (SMSHandle.isCammand(command))
+        {
+            SMSHandle smsHandle = new SMSHandle();
+            smsHandle.sendSMS(command);
         }
 
     }
