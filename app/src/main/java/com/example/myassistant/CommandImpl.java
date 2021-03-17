@@ -2,7 +2,6 @@ package com.example.myassistant;
 
 import android.content.Intent;
 import android.os.Build;
-import android.telephony.SmsManager;
 
 import androidx.annotation.RequiresApi;
 
@@ -69,11 +68,17 @@ public class CommandImpl {
         {
             MainActivity.getContext().stopService(MainActivity.musicIntent);
         }
-        else if (SMSHandle.isCammand(command))
+        else if (CommunicationHandle.isCammandSendSms(command))
         {
-            SMSHandle smsHandle = new SMSHandle();
+            CommunicationHandle smsHandle = new CommunicationHandle();
             smsHandle.sendSMS(command);
         }
+        else if(CommunicationHandle.isCammandCall(command))
+        {
+            CommunicationHandle ch = new CommunicationHandle();
+            ch.callContact(command);
+        }
+
 
     }
 }

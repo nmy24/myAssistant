@@ -1,7 +1,9 @@
 package com.example.myassistant;
 
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.provider.ContactsContract;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -11,14 +13,14 @@ import android.widget.Toast;
  * this class handles all the functions related to sending sms.
  * @author Noa Fatael
  */
-public class SMSHandle {
+public class CommunicationHandle {
     SmsManager smsManager;
     String pNumber;
 
     /**
      * SMSHandle constructor
      */
-    public SMSHandle() {
+    public CommunicationHandle() {
         smsManager = SmsManager.getDefault();
         pNumber = "";
     }
@@ -32,7 +34,7 @@ public class SMSHandle {
     public void sendSMS(String command) {
         String contIn = getMSGCont(command);
         pNumber = extractNumber(command);
-        String name = getContactNameFromCommand(command);
+        String name = getContactNameFromCommandSMS(command);
         if (pNumber == "")//there was no number ===> contact
         {
             getContactpNumber(name);
@@ -46,7 +48,7 @@ public class SMSHandle {
      * @param
      * @return return if this command fits this class.
      */
-    public static boolean isCammand(String command) {
+    public static boolean isCammandSendSms(String command) {
         return (command.contains("send") && command.contains("sms"));
     }
     /**
@@ -105,7 +107,7 @@ public class SMSHandle {
      * @param
      * @return who to send the sms.
      */
-    private String getContactNameFromCommand(String command)
+    private String getContactNameFromCommandSMS(String command)
     {
         String name = "";
         try{
@@ -137,5 +139,24 @@ public class SMSHandle {
             return cont;
         }
     }
-
+    public void callContact(String command)
+    {
+        getContactpNumber(command.substring(("call ").length()));
+        makePhoneCall();
+    }
+    private void makePhoneCall()
+    {
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:"+pNumber));//change the number
+        MainActivity.getContext().startActivity(callIntent);
+    }
+    /**
+     * This function return if this command fits this class.
+     *
+     * @param
+     * @return return if this command fits this class.
+     */
+    public static boolean isCammandCall(String command) {
+        return (command.contains("call"));
+    }
 }
