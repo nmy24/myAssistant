@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static TTS_Manager tts;
     public static ArrayList<Integer> songs;
     public static Intent musicIntent;
+    public final static BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
 
     /**
      * This is onCreate function.

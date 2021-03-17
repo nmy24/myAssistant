@@ -139,11 +139,23 @@ public class CommunicationHandle {
             return cont;
         }
     }
+    /**
+     * This function will call the contact asked.
+     *
+     * @param
+     * @return
+     */
     public void callContact(String command)
     {
         getContactpNumber(command.substring(("call ").length()));
         makePhoneCall();
     }
+    /**
+     * This function will call the contact via phone.
+     *
+     * @param
+     * @return
+     */
     private void makePhoneCall()
     {
         Intent callIntent = new Intent(Intent.ACTION_CALL);

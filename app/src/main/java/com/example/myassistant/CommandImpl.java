@@ -78,6 +78,22 @@ public class CommandImpl {
             CommunicationHandle ch = new CommunicationHandle();
             ch.callContact(command);
         }
+        else if(SettingsHandle.isCammandBluetoothOn(command))
+        {
+            SettingsHandle.bluetoothOn();
+        }
+        else if(SettingsHandle.isCammandBluetoothOff(command))
+        {
+            SettingsHandle.bluetoothOff();
+        }
+        else if(SettingsHandle.isCammandWifiOff(command))
+        {
+            SettingsHandle.switchWiFi(SettingsHandle.WIFI_OFF);
+        }
+        else if(SettingsHandle.isCammandWifiOn(command))
+        {
+            SettingsHandle.switchWiFi(SettingsHandle.WIFI_ON);
+        }
 
 
     }
