@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v == btnStart)
         {
-            //tts.talk("listening");
             Intent intent = new Intent(getApplicationContext(),SttService.class);
             startService(intent);
         }

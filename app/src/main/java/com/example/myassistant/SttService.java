@@ -68,7 +68,7 @@ public class SttService extends Service {
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 Log.d("aaaaInputIn", data.get(0)); //prints what the user says
 
-                //CommandImpl.getCommandDone(data.get(0).toString());
+                CommandImpl.getCommandDone(data.get(0).toString());
                 //SharedPreferences pref = getApplicationContext().getSharedPreferences(MainActivity.FILENAME, 0); // 0 - for private mode
                 //String name = pref.getString("assistantName", null); // getting String
                 speechRecognizer.startListening(speechRecognizerIntent);
