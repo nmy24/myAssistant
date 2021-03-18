@@ -81,7 +81,6 @@ public class SttService extends Service {
         });
         return START_STICKY;
     }
-
     /**
      * This function will destroy the sevice.
      * @param

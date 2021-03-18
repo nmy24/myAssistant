@@ -86,5 +86,4 @@ public class SettingsHandle {
     public static boolean isCammandWifiOff(String command){
         return (command.contains("wifi") && command.contains("off"));
     }
-
 }

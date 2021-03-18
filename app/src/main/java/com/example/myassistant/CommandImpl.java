@@ -11,7 +11,7 @@ import androidx.annotation.RequiresApi;
  */
 public class CommandImpl {
     /**
-     * This function will call the wanted command
+     * This function will call the wanted command.
      * @param command
      * @return
      */
@@ -94,7 +94,10 @@ public class CommandImpl {
         {
             SettingsHandle.switchWiFi(SettingsHandle.WIFI_ON);
         }
-
+        else if(TimeHandle.isCammandGetTime(command))
+        {
+            MainActivity.tts.talk(TimeHandle.getTimeSent());
+        }
 
     }
 }
