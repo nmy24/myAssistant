@@ -34,6 +34,9 @@ public class CommandImpl {
         myMap.put(MusicService::isCammandPlay, MusicService::startMusicSer);
         myMap.put(MusicService::isCammandStopPlay, MusicService::stopMusicSer);
         myMap.put(TimeHandle::isCammandGetTime, TimeHandle::sayTime);
+        myMap.put(TimeHandle::isCammandGetDay, TimeHandle::sayDay);
+        myMap.put(TimeHandle::isCammandGetDate, TimeHandle::sayDate);
+        myMap.put(TimeHandle::isCammandGetYear, TimeHandle::sayYear);
         myMap.put(sayCheck, sayCommandHandler);
 
     }

@@ -32,15 +32,18 @@ public class TimeHandle {
         updateTime();
         return currentTimeArr[DAY_IN_WEEK];
     }
-    public static String getDate()
-    {
+    public static void sayDate(String s) {
         updateTime();
-        return "the date is the "+ currentTimeArr[MONTH_DAY] + " of " + currentTimeArr[MONTH];
+        MainActivity.tts.talk("the date is the "+ currentTimeArr[MONTH_DAY] + " of " + currentTimeArr[MONTH]);
     }
-    public static String getYear()
+    public static void sayYear(String command)
+    {
+        MainActivity.tts.talk("the year is " + getYear());
+    }
+    private static String getYear()
     {
         updateTime();
-        return "the year is "+ currentTimeArr[YEAR];
+        return currentTimeArr[YEAR];
     }
     private static void updateTime()
     {
@@ -54,5 +57,29 @@ public class TimeHandle {
      */
     public static boolean isCammandGetTime(String command){
         return (command.contains("time"));
+    }
+    /**
+     * This function return if this command fits this class.
+     * @param command
+     * @return return if this command fits this class.
+     */
+    public static boolean isCammandGetDay(String command){
+        return (command.contains("day"));
+    }
+    /**
+     * This function return if this command fits this class.
+     * @param command
+     * @return return if this command fits this class.
+     */
+    public static boolean isCammandGetDate(String command){
+        return (command.contains("date"));
+    }
+    /**
+     * This function return if this command fits this class.
+     * @param
+     * @return return if this command fits this class.
+     */
+    public static boolean isCammandGetYear(String command){
+        return (command.contains("year"));
     }
 }
