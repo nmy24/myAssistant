@@ -14,7 +14,7 @@ public class BatteryHandle {
      * @param
      * @return returns a float number -> battery %.
      */
-    public static float getBatteryLevel()
+    private static float getBatteryLevel()
     {
         IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         Intent batteryStatus = MainActivity.getContext().registerReceiver(null, ifilter);
@@ -31,4 +31,11 @@ public class BatteryHandle {
     public static boolean isCammand(String command){
         return command.contains("battery");
     }
+
+
+    public static void handleCommand(String command) {
+        float battery = BatteryHandle.getBatteryLevel();
+        MainActivity.tts.talk("you have " + battery + " precents");
+    }
+
 }

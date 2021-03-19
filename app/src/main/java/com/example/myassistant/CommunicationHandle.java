@@ -14,13 +14,10 @@ import android.widget.Toast;
  * @author Noa Fatael
  */
 public class CommunicationHandle {
-    SmsManager smsManager;
-    String pNumber;
+    static SmsManager smsManager;
+    static String pNumber;
 
-    /**
-     * SMSHandle constructor
-     */
-    public CommunicationHandle() {
+    public static void setCommunicationHandleVars() {
         smsManager = SmsManager.getDefault();
         pNumber = "";
     }
@@ -31,7 +28,8 @@ public class CommunicationHandle {
      * @param
      * @return
      */
-    public void sendSMS(String command) {
+    public static void sendSMS(String command) {
+        setCommunicationHandleVars();
         String contIn = getMSGCont(command);
         pNumber = extractNumber(command);
         String name = getContactNameFromCommandSMS(command);
@@ -57,7 +55,7 @@ public class CommunicationHandle {
      * @param
      * @return returns phone number from the command or ""
      */
-    private String extractNumber(String str) {
+    private static String extractNumber(String str) {
         if (str == null || str.isEmpty()) return "";
         StringBuilder sb = new StringBuilder();
         boolean found = false;
@@ -78,7 +76,7 @@ public class CommunicationHandle {
      * @param
      * @return
      */
-    private void getContactpNumber(String nameIn) {
+    private static void getContactpNumber(String nameIn) {
         ContentResolver cr = MainActivity.getContext().getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, null);
@@ -107,7 +105,7 @@ public class CommunicationHandle {
      * @param
      * @return who to send the sms.
      */
-    private String getContactNameFromCommandSMS(String command)
+    private static String getContactNameFromCommandSMS(String command)
     {
         String name = "";
         try{
@@ -126,7 +124,7 @@ public class CommunicationHandle {
      * @param
      * @return the content to send.
      */
-    private String getMSGCont(String command) {
+    private static String getMSGCont(String command) {
         {
             String cont = "";
             try{
@@ -145,8 +143,9 @@ public class CommunicationHandle {
      * @param
      * @return
      */
-    public void callContact(String command)
+    public static void callContact(String command)
     {
+        setCommunicationHandleVars();
         getContactpNumber(command.substring(("call ").length()));
         makePhoneCall();
     }
@@ -156,7 +155,7 @@ public class CommunicationHandle {
      * @param
      * @return
      */
-    private void makePhoneCall()
+    private static void makePhoneCall()
     {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:"+pNumber));//change the number

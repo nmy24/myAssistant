@@ -22,7 +22,7 @@ public class SettingsHandle {
      * @param
      * @return
      */
-    public static void bluetoothOn()
+    public static void bluetoothOn(String command)
     {
         if(MainActivity.bAdapter == null)
         {
@@ -40,7 +40,7 @@ public class SettingsHandle {
      * @param
      * @return
      */
-    public static void bluetoothOff()
+    public static void bluetoothOff(String command)
     {
         MainActivity.bAdapter.disable();
     }

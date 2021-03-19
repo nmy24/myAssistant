@@ -14,12 +14,12 @@ import androidx.appcompat.app.AlertDialog;
  * @author Noa Fatael
  */
 public class FlashlightHandle {
-    private CameraManager mCameraManager;
-    private String mCameraId;
+    private static CameraManager mCameraManager;
+    private static String mCameraId;
     /**
      * FlashlightHandle constructor
      */
-    public FlashlightHandle()
+    private static void setFlashlightHandleVars()
     {
         boolean isFlashAvailable = MainActivity.getContext().getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
         if (!isFlashAvailable) {
@@ -38,7 +38,7 @@ public class FlashlightHandle {
      * @param
      * @return
      */
-    private void showNoFlashError() {
+    private static void showNoFlashError() {
         AlertDialog alert = new AlertDialog.Builder(MainActivity.getContext())
                 .create();
         alert.setTitle("Oops!");
@@ -51,9 +51,11 @@ public class FlashlightHandle {
      * @param
      * @return
      */
-    public void switchFlashLight(boolean status) {
+    public static void switchFlashLight(String status) {
+        boolean st = status.contains("on") || status.contains("open");
+        setFlashlightHandleVars();
         try {
-            mCameraManager.setTorchMode(mCameraId, status);
+            mCameraManager.setTorchMode(mCameraId, st);
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }

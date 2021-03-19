@@ -3,6 +3,7 @@ package com.example.myassistant;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -12,11 +13,13 @@ import android.widget.Toast;
 public class GoogleHandle {
     /**
      * This function will search a Google Query.
-     * @param Query
+     * @param
      * @return
      */
     public static void searchGoogleQuery(String query)
     {
+        query = query.substring(("search in google ").length(), query.length());
+        MainActivity.tts.talk("searching");
         Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
         intent.putExtra(SearchManager.QUERY, query); // query contains search string
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -24,11 +27,13 @@ public class GoogleHandle {
     }
     /**
      * This function will play a song from youtube.
-     * @param Query
+     * @param
      * @return
      */
     public static void playFromYoutube(String query)
     {
+        query = query.substring(("search in youtube ").length(), query.length());
+        MainActivity.tts.talk("searching");
         Intent intent = new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.youtube.com/search?q="+query));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         MainActivity.getContext().startActivity(intent);
@@ -38,7 +43,7 @@ public class GoogleHandle {
      * @param
      * @return
      */
-    public static void sendEmail()
+    public static void sendEmail(String command)
     {
         String[] to = {""};
         String[] cc = {""};
@@ -61,7 +66,7 @@ public class GoogleHandle {
      * @return return if this command fits this class.
      */
     public static boolean isCammandSearchGoogleQuery(String command){
-        return (command.contains("send") && command.contains("email"));
+        return (command.contains("search") && command.contains("google"));
     }
     /**
      * This function return if this command fits this class.

@@ -29,7 +29,7 @@ public class CameraHandle {
      * @param
      * @return
      */
-    public static void openCamera()
+    public static void openCamera(String command)
     {
         if(checkCameraHardware())
         {

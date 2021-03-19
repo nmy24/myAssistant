@@ -24,6 +24,7 @@ public class SttService extends Service {
 
     public static SpeechRecognizer speechRecognizer;
     static Intent speechRecognizerIntent = null;
+    private CommandImpl commandHandle;
 
     /**
      * This function will create the sevice.
@@ -38,6 +39,7 @@ public class SttService extends Service {
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(MainActivity.getContext());
         speechRecognizer.startListening(speechRecognizerIntent);
+        commandHandle = new CommandImpl();
     }
     /**
      * This function will start the sevice.
@@ -67,8 +69,7 @@ public class SttService extends Service {
 
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 Log.d("aaaaInputIn", data.get(0)); //prints what the user says
-
-                CommandImpl.getCommandDone(data.get(0).toString());
+                commandHandle.getCommandDone(data.get(0).toString());
                 //SharedPreferences pref = getApplicationContext().getSharedPreferences(MainActivity.FILENAME, 0); // 0 - for private mode
                 //String name = pref.getString("assistantName", null); // getting String
                 speechRecognizer.startListening(speechRecognizerIntent);
