@@ -16,7 +16,11 @@ public class CommandImpl {
     private HashMap<HandleCheckFunction, CommandHandler> myMap;
     CommandImpl()
     {
+        HandleCheckFunction sayCheck = command -> command.contains("say");
+        CommandHandler sayCommandHandler = command -> MainActivity.tts.talk(command.substring("say ".length()));
+
         myMap = new HashMap<>();
+
         myMap.put(BatteryHandle::isCammand, BatteryHandle::handleCommand);
         myMap.put(CameraHandle::isCammand, CameraHandle::openCamera);
         myMap.put(GoogleHandle::isCammandSearchGoogleQuery, GoogleHandle::searchGoogleQuery);
@@ -27,6 +31,10 @@ public class CommandImpl {
         myMap.put(SettingsHandle::isCammandBluetoothOn, SettingsHandle::bluetoothOn);
         myMap.put(SettingsHandle::isCammandBluetoothOff, SettingsHandle::bluetoothOff);
         myMap.put(FlashlightHandle::isCammand, FlashlightHandle::switchFlashLight);
+        myMap.put(MusicService::isCammandPlay, MusicService::startMusicSer);
+        myMap.put(MusicService::isCammandStopPlay, MusicService::stopMusicSer);
+        myMap.put(TimeHandle::isCammandGetTime, TimeHandle::sayTime);
+        myMap.put(sayCheck, sayCommandHandler);
 
     }
     /**
@@ -45,18 +53,6 @@ public class CommandImpl {
             }
         }
         /*
-        else if(command.contains("music") && command.contains("play"))
-        {
-            //start sount track in background:
-            MainActivity.musicIntent = new Intent(MainActivity.getContext(),MusicService.class);
-            MainActivity.getContext().startService(MainActivity.musicIntent);
-
-        }
-        else if(command.contains("music") && command.contains("stop"))
-        {
-            MainActivity.getContext().stopService(MainActivity.musicIntent);
-        }
-
         else if(SettingsHandle.isCammandWifiOff(command))
         {
             SettingsHandle.switchWiFi(SettingsHandle.WIFI_OFF);

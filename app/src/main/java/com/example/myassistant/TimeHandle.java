@@ -2,6 +2,7 @@ package com.example.myassistant;
 
 import android.util.Log;
 
+import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,15 +13,24 @@ public class TimeHandle {
     private static final int MONTH_DAY = 2;
     private static final int TIME = 3;
     private static final int YEAR = 5;
-    public static String getTimeSent()
+
+    public static void sayTime(String command)
     {
-        updateTime();
-        return "the time is "+ currentTimeArr[TIME];
+        MainActivity.tts.talk("the time is " + getTime());
     }
-    public static String getDay()
+    private static String getTime()
     {
         updateTime();
-        return "the day is "+ currentTimeArr[DAY_IN_WEEK];
+        return currentTimeArr[TIME];
+    }
+    public static void sayDay(String command)
+    {
+        MainActivity.tts.talk("the day is " + getDay());
+    }
+    private static String getDay()
+    {
+        updateTime();
+        return currentTimeArr[DAY_IN_WEEK];
     }
     public static String getDate()
     {

@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -50,4 +51,32 @@ public class MusicService extends Service {
     public void onDestroy() {
         player.stop();
     }
+
+    /**
+     * This function return if this command fits this class.
+     * @param command
+     * @return return if this command fits this class.
+     */
+    public static boolean isCammandPlay(String command){
+        return (command.contains("music") && command.contains("play"));
+    }
+    /**
+     * This function return if this command fits this class.
+     * @param command
+     * @return return if this command fits this class.
+     */
+    public static boolean isCammandStopPlay(String command){
+        return command.contains("music") && command.contains("stop");
+    }
+    public static void startMusicSer(String coomand)
+    {
+        //start sount track in background:
+        MainActivity.musicIntent = new Intent(MainActivity.getContext(),MusicService.class);
+        MainActivity.getContext().startService(MainActivity.musicIntent);
+    }
+    public static void stopMusicSer(String coomand)
+    {
+        MainActivity.getContext().stopService(MainActivity.musicIntent);
+    }
+
 }
