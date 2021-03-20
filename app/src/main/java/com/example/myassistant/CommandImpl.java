@@ -64,10 +64,7 @@ public class CommandImpl {
         {
             SettingsHandle.switchWiFi(SettingsHandle.WIFI_ON);
         }
-        else if(TimeHandle.isCammandGetTime(command))
-        {
-            MainActivity.tts.talk(TimeHandle.getTimeSent());
-        }*/
+     */
 
     }
 }

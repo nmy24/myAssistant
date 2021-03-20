@@ -16,7 +16,7 @@ public class TimeHandle {
 
     public static void sayTime(String command)
     {
-        MainActivity.tts.talk("the time is " + getTime());
+        MainActivity.tts.talk(getTime());
     }
     private static String getTime()
     {
@@ -25,7 +25,7 @@ public class TimeHandle {
     }
     public static void sayDay(String command)
     {
-        MainActivity.tts.talk("the day is " + getDay());
+        MainActivity.tts.talk(getDay());
     }
     private static String getDay()
     {
@@ -34,11 +34,11 @@ public class TimeHandle {
     }
     public static void sayDate(String s) {
         updateTime();
-        MainActivity.tts.talk("the date is the "+ currentTimeArr[MONTH_DAY] + " of " + currentTimeArr[MONTH]);
+        MainActivity.tts.talk(currentTimeArr[MONTH_DAY] + " of " + currentTimeArr[MONTH]);
     }
     public static void sayYear(String command)
     {
-        MainActivity.tts.talk("the year is " + getYear());
+        MainActivity.tts.talk(getYear());
     }
     private static String getYear()
     {
