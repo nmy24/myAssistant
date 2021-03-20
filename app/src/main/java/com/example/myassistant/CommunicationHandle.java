@@ -2,6 +2,7 @@ package com.example.myassistant;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
@@ -16,12 +17,16 @@ import android.widget.Toast;
 public class CommunicationHandle {
     static SmsManager smsManager;
     static String pNumber;
-
+    /**
+     * This function will init the class vars.
+     *
+     * @param
+     * @return
+     */
     public static void setCommunicationHandleVars() {
         smsManager = SmsManager.getDefault();
         pNumber = "";
     }
-
     /**
      * This function will send an sms.
      *
@@ -32,7 +37,7 @@ public class CommunicationHandle {
         setCommunicationHandleVars();
         String contIn = getMSGCont(command);
         pNumber = extractNumber(command);
-        String name = getContactNameFromCommandSMS(command);
+        String name = getContactNameFromCommand(command);
         if (pNumber == "")//there was no number ===> contact
         {
             getContactpNumber(name);
@@ -105,7 +110,7 @@ public class CommunicationHandle {
      * @param
      * @return who to send the sms.
      */
-    private static String getContactNameFromCommandSMS(String command)
+    private static String getContactNameFromCommand(String command)
     {
         String name = "";
         try{
@@ -169,5 +174,54 @@ public class CommunicationHandle {
      */
     public static boolean isCammandCall(String command) {
         return (command.contains("call"));
+    }
+    /**
+     * This function will send whatsapp msg
+     *
+     * @param
+     * @return
+     */
+    public static void sendWhatsapp(String command)
+    {
+        String name = getContactNameFromCommand(command);
+        String cont = getMSGCont(command);
+        getContactpNumber(name);
+        if(isAppInstalled("com.whatsapp") && !name.equals("") && !cont.equals("") && !pNumber.equals("")){
+            MainActivity.getContext().startActivity(
+                    new Intent(Intent.ACTION_VIEW,
+                            Uri.parse(
+                                    String.format("https://api.whatsapp.com/send?phone=%s&text=%s", "+972" + pNumber, cont)// for only Israeli phone numbers.
+                            )
+                    )
+            );
+        }
+
+    }
+    /**
+     * This function return if this command fits this class.
+     *
+     * @param
+     * @return return if this command fits this class.
+     */
+    public static boolean isCommandSendWhatsapp(String command)
+    {
+        return command.contains("send") && command.contains("whatsapp");
+    }
+    /**
+     * This function will check if a app is installed on the phone
+     *
+     * @param
+     * @return
+     */
+    private static boolean isAppInstalled(String uri) {
+        PackageManager pm = MainActivity.getContext().getPackageManager();
+        boolean app_installed = false;
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            app_installed = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            app_installed = false;
+        }
+        return app_installed;
     }
 }

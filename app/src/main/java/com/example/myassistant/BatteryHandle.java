@@ -31,8 +31,11 @@ public class BatteryHandle {
     public static boolean isCammand(String command){
         return command.contains("battery");
     }
-
-
+    /**
+     * This function will say the amount of battery.
+     * @param
+     * @return
+     */
     public static void handleCommand(String command) {
         float battery = BatteryHandle.getBatteryLevel();
         MainActivity.tts.talk("you have " + battery + " precents");

@@ -68,12 +68,22 @@ public class MusicService extends Service {
     public static boolean isCammandStopPlay(String command){
         return command.contains("music") && command.contains("stop");
     }
-    public static void startMusicSer(String coomand)
+    /**
+     * This function will start the music sevice.
+     * @param
+     * @return
+     */
+    public static void startMusicSer(String command)
     {
         //start sount track in background:
         MainActivity.musicIntent = new Intent(MainActivity.getContext(),MusicService.class);
         MainActivity.getContext().startService(MainActivity.musicIntent);
     }
+    /**
+     * This function will stop the music sevice.
+     * @param
+     * @return
+     */
     public static void stopMusicSer(String coomand)
     {
         MainActivity.getContext().stopService(MainActivity.musicIntent);

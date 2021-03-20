@@ -28,6 +28,7 @@ public class CommandImpl {
         myMap.put(GoogleHandle::isCammandSendEmail, GoogleHandle::sendEmail);
         myMap.put(CommunicationHandle::isCammandCall, CommunicationHandle::callContact);
         myMap.put(CommunicationHandle::isCammandSendSms, CommunicationHandle::sendSMS);
+        myMap.put(CommunicationHandle::isCommandSendWhatsapp, CommunicationHandle::sendWhatsapp);
         myMap.put(SettingsHandle::isCammandBluetoothOn, SettingsHandle::bluetoothOn);
         myMap.put(SettingsHandle::isCammandBluetoothOff, SettingsHandle::bluetoothOff);
         myMap.put(FlashlightHandle::isCammand, FlashlightHandle::switchFlashLight);
