@@ -62,7 +62,9 @@ public class SttService extends Service {
             @Override
             public void onError(int i) {
                 Log.d("aaaaErrorFunction","error number is "+i); //https://developer.android.com/reference/android/speech/SpeechRecognizer for getting wats wrong
-                //need to start the service again XDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+                //Intent intent = new Intent(getApplicationContext(),SttService.class);
+                //stopService(intent);
+               // startService(intent);
             }
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override

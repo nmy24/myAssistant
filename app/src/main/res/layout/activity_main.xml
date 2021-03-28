@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#937F7F"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -15,12 +16,14 @@
             android:id="@+id/btnStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#A0C2DD"
             android:text="start" />
 
         <Button
             android:id="@+id/btnStop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#A0C2DD"
             android:text="stop" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
