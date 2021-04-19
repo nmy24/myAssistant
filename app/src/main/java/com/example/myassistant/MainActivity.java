@@ -147,12 +147,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == RecordAudioRequestCode && grantResults.length > 0) {
+        /*if (requestCode == RecordAudioRequestCode && grantResults.length > 0) {
             for (int i = 0; i < grantResults.length; i++) {
                 if (grantResults[i] == PackageManager.PERMISSION_GRANTED)
                     Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
             }
-        }
+        }*/
     }
 
 
@@ -208,6 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             case R.id.about:
                 //goto about screen
+                startActivity(new Intent(this, about_activity.class));
                 break;
             case R.id.settings:
                 SettingsHandle.openSettings();

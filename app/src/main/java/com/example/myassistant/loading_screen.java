@@ -23,7 +23,7 @@ public class loading_screen extends AppCompatActivity {
                 Intent i=new Intent(loading_screen.this,MainActivity.class);
                 startActivity(i);
             }
-        }, 5000);
+        }, SPLASH_TIME);
     }
 
 }
