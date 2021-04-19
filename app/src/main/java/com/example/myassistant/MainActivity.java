@@ -15,17 +15,21 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 
 /**
  * this is the MainActivity class.
  * @author Noa Fatael
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, NameDialog.NameDialogListener {
     private Button btnStart, btnStop;
     private static Context main_activity_context;
     private static final Integer RecordAudioRequestCode = 1;
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * This is onCreate function.
+     *
      * @param
      * @return
      */
@@ -46,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        getSupportActionBar().hide();
 
         //init buttons
         btnStart = (Button) findViewById(R.id.btnStart);
@@ -57,6 +60,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         main_activity_context = this;
 
+        initMusic();
+
+        tts = new TTS_Manager();
+
+        //ask for permission if it didn't already
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            checkPermission();
+        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            checkPermission();
+        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            checkPermission();
+        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            checkPermission();
+        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
+            checkPermission();
+        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            checkPermission();
+        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            checkPermission();
+        }
+    }
+
+    private void initMusic()
+    {
         //init songs
         songs = new ArrayList<Integer>();
         songs.add(R.raw.a);
@@ -66,91 +93,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         songs.add(R.raw.e);
         songs.add(R.raw.f);
         songs.add(R.raw.g);
-
-        //store assistant name in Shared Preferences
-        SharedPreferences pref = getApplicationContext().getSharedPreferences(FILENAME, 0); // 0 - for private mode
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("assistantName", "Maya"); // Storing string
-        editor.commit(); // commit changes
-        tts = new TTS_Manager();
-        //openDialog();
-
-        //ask for permission if it didn't already
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
-            checkPermission();
-        }
-        else if(ContextCompat.checkSelfPermission(this,Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
-            checkPermission();
-        }
-        else if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            checkPermission();
-        }
-        else if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            checkPermission();
-        }
-        else if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED){
-            checkPermission();
-        }
-        else if(ContextCompat.checkSelfPermission(this,Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
-            checkPermission();
-        }
-        else if(ContextCompat.checkSelfPermission(this,Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-            checkPermission();
-        }
     }
+
     /**
      * This is onClick function.
      * btnStart => start to listen
      * btnStop => stop to listen
+     *
      * @param
      * @return
      */
     @Override
     public void onClick(View v) {
-        if(v == btnStart)
-        {
-            Intent intent = new Intent(getApplicationContext(),SttService.class);
+        if (v == btnStart) {
+            Intent intent = new Intent(getApplicationContext(), SttService.class);
             startService(intent);
-        }
-        else if(v == btnStop)
-        {
+        } else if (v == btnStop) {
             tts.talk("stop listening");
-            Intent intent = new Intent(getApplicationContext(),SttService.class);
+            Intent intent = new Intent(getApplicationContext(), SttService.class);
             stopService(intent);
 
         }
     }
+
     /**
      * This function will return the context.
+     *
      * @param
      * @return context
      */
     public static Context getContext() {
         return main_activity_context;
     }
+
     /**
      * This function will check if permission granted.
+     *
      * @param
      * @return
      */
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE},RecordAudioRequestCode);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE}, RecordAudioRequestCode);
         }
     }
+
     /**
      * This function will ask for permission.
+     *
      * @param requestCode, permissions, grantResults
      * @return
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == RecordAudioRequestCode && grantResults.length > 0 ){
-            for(int i = 0; i < grantResults.length; i++)
-            {
-                if(grantResults[i] == PackageManager.PERMISSION_GRANTED)
-                    Toast.makeText(this,"Permission Granted",Toast.LENGTH_SHORT).show();
+        if (requestCode == RecordAudioRequestCode && grantResults.length > 0) {
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED)
+                    Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -183,4 +183,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NameDialog exampleDialog = new NameDialog();
         exampleDialog.show(getSupportFragmentManager(), "example dialog");
     }
+
+    @Override
+    public void applyTexts(String name) {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(FILENAME, 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("assistantName", name); // Storing string
+        editor.commit(); // commit changes
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+        View v = this.getWindow().getDecorView();
+        switch (id)
+        {
+            case R.id.about:
+                //goto about screen
+                break;
+            case R.id.settings:
+                SettingsHandle.openSettings();
+                break;
+            case R.id.assistant_name:
+                openDialog();
+                break;
+        }
+        return true;
+    }
+
 }

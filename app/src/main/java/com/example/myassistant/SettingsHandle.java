@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -85,5 +86,10 @@ public class SettingsHandle {
      */
     public static boolean isCammandWifiOff(String command){
         return (command.contains("wifi") && command.contains("off"));
+    }
+
+    public static void openSettings()
+    {
+        MainActivity.getContext().startActivity(new Intent(Settings.ACTION_SETTINGS));
     }
 }
