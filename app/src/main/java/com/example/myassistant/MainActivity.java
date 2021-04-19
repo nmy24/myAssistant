@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnStart.setOnClickListener(this);
         btnStop.setOnClickListener(this);
 
+        CommunicationHandle.isInCall = false;
+
         main_activity_context = this;
 
         initMusic();

@@ -70,6 +70,8 @@ public class SttService extends Service {
             @Override
             public void onResults(Bundle bundle) {
 
+                if(CommunicationHandle.isInCall)
+                    stopSelf();
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 Log.d("aaaaInputIn", data.get(0)); //prints what the user says
                 SharedPreferences pref = getApplicationContext().getSharedPreferences(MainActivity.FILENAME, 0); // 0 - for private mode

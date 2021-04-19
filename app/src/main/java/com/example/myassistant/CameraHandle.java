@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
  * @author Noa Fatael
  */
 public class CameraHandle {
-
     /**
      * This function check if the phone has camera hardware.
      * @param

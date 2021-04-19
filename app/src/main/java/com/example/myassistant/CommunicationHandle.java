@@ -15,6 +15,7 @@ import android.widget.Toast;
  * @author Noa Fatael
  */
 public class CommunicationHandle {
+    public static boolean isInCall;
     static SmsManager smsManager;
     static String pNumber;
     /**
