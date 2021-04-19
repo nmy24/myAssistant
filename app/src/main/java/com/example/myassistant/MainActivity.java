@@ -1,6 +1,7 @@
 package com.example.myassistant;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -8,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static ArrayList<Integer> songs;
     public static Intent musicIntent;
     public final static BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
+    private Toast toast;
+    private long lastBackPressTime = 0;
 
     /**
      * This is onCreate function.
@@ -69,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString("assistantName", "Maya"); // Storing string
         editor.commit(); // commit changes
         tts = new TTS_Manager();
+        //openDialog();
 
         //ask for permission if it didn't already
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
@@ -148,5 +153,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this,"Permission Granted",Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.super.onBackPressed();
+                    }
+                })
+
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog ad = builder.create();
+        ad.show();
+    }
+
+    public void openDialog() {
+        NameDialog exampleDialog = new NameDialog();
+        exampleDialog.show(getSupportFragmentManager(), "example dialog");
     }
 }

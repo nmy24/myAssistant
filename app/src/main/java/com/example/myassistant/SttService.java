@@ -72,11 +72,18 @@ public class SttService extends Service {
 
                 ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 Log.d("aaaaInputIn", data.get(0)); //prints what the user says
-                commandHandle.getCommandDone(data.get(0).toString());
-                //SharedPreferences pref = getApplicationContext().getSharedPreferences(MainActivity.FILENAME, 0); // 0 - for private mode
-                //String name = pref.getString("assistantName", null); // getting String
-                speechRecognizer.startListening(speechRecognizerIntent);
+                SharedPreferences pref = getApplicationContext().getSharedPreferences(MainActivity.FILENAME, 0); // 0 - for private mode
+                String name = pref.getString("assistantName", null); // getting String
+                String comm = data.get(0).toString();
+                comm = comm.toLowerCase();
+                name = name.toLowerCase();
+                if(comm.contains("hey " + name))
+                {
+                    comm.substring(0, ("hey " + name).length());
+                    commandHandle.getCommandDone(data.get(0).toString());
 
+                }
+                speechRecognizer.startListening(speechRecognizerIntent);
             }
             @Override
             public void onPartialResults(Bundle partialResults) {}
