@@ -25,15 +25,17 @@ public class SttService extends Service {
     public static SpeechRecognizer speechRecognizer;
     static Intent speechRecognizerIntent = null;
     private CommandImpl commandHandle;
+    private static boolean isOn;
 
     /**
-     * This function will create the sevice.
+     * This function will create the service.
      * @param
      * @return
      */
     @Override
     public void onCreate() {
         super.onCreate();
+        isOn = true;
         speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
@@ -42,7 +44,7 @@ public class SttService extends Service {
         commandHandle = new CommandImpl();
     }
     /**
-     * This function will start the sevice.
+     * This function will start the service.
      * @param intent, flag, startId
      * @return integer
      */
@@ -62,30 +64,40 @@ public class SttService extends Service {
             @Override
             public void onError(int i) {
                 Log.d("aaaaErrorFunction","error number is "+i); //https://developer.android.com/reference/android/speech/SpeechRecognizer for getting wats wrong
-                //Intent intent = new Intent(getApplicationContext(),SttService.class);
-                //stopService(intent);
-               // startService(intent);
+                Intent intent = new Intent(getApplicationContext(),SttService.class);
+                stopService(intent);
+                startService(intent);
             }
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onResults(Bundle bundle) {
 
-                if(CommunicationHandle.isInCall)
+                if(CommunicationHandle.isInCall) {
+                    isOn = false;
                     stopSelf();
-                ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                Log.d("aaaaInputIn", data.get(0)); //prints what the user says
-                SharedPreferences pref = getApplicationContext().getSharedPreferences(MainActivity.FILENAME, 0); // 0 - for private mode
-                String name = pref.getString("assistantName", null); // getting String
-                String comm = data.get(0).toString();
-                comm = comm.toLowerCase();
-                name = name.toLowerCase();
-                if(comm.contains("hey " + name))
-                {
-                    comm.substring(0, ("hey " + name).length());
-                    commandHandle.getCommandDone(data.get(0).toString());
-
                 }
-                speechRecognizer.startListening(speechRecognizerIntent);
+
+                if(isOn)
+                {
+                    ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                    Log.d("aaaaInputIn", data.get(0)); //prints what the user says
+
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences(MainActivity.FILENAME, 0); // 0 - for private mode
+                    String name = pref.getString("assistantName", ""); // getting String
+                    String comm = data.get(0).toString();
+                    comm = comm.toLowerCase();
+                    name = name.toLowerCase();
+
+                    MainActivity.changeOutput(comm);
+                    if(comm.contains("hey " + name))
+                    {
+                        comm.substring(0, ("hey " + name).length());
+                        commandHandle.getCommandDone(data.get(0).toString());
+
+                    }
+                    speechRecognizer.startListening(speechRecognizerIntent);
+                }
+
             }
             @Override
             public void onPartialResults(Bundle partialResults) {}
@@ -104,10 +116,17 @@ public class SttService extends Service {
         super.onDestroy();
     }
 
+    public static void sttOn()
+    {
+        isOn = true;
+    }
+    public static void sttOff()
+    {
+        isOn = false;
+    }
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
-
 
 }

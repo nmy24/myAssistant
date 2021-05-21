@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public final static BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
     private Toast toast;
     private long lastBackPressTime = 0;
+    private static TextView tvOut;
 
     /**
      * This is onCreate function.
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //init buttons
         btnStart = (Button) findViewById(R.id.btnStart);
         btnStop = (Button) findViewById(R.id.btnStop);
+        tvOut = (TextView) findViewById(R.id.tvOut);
         btnStart.setOnClickListener(this);
         btnStop.setOnClickListener(this);
 
@@ -108,9 +110,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == btnStart) {
+            SttService.sttOn();
             Intent intent = new Intent(getApplicationContext(), SttService.class);
             startService(intent);
         } else if (v == btnStop) {
+            SttService.sttOff();
             tts.talk("stop listening");
             Intent intent = new Intent(getApplicationContext(), SttService.class);
             stopService(intent);
@@ -222,4 +226,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+    public static void changeOutput(String sayed)
+    {
+        tvOut.setText(sayed);
+    }
 }
