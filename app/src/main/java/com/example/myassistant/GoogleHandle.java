@@ -7,13 +7,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 /**
- * this class handles all the functions related the use of google.
+ * This class handles all the functions related the use of google (gmail, .
  * @author Noa Fatael
  */
 public class GoogleHandle {
     /**
      * This function will search a Google Query.
-     * @param
+     * @param query -> what to search.
      * @return
      */
     public static void searchGoogleQuery(String query)
@@ -27,7 +27,7 @@ public class GoogleHandle {
     }
     /**
      * This function will play a song from youtube.
-     * @param
+     * @param query -> name of song.
      * @return
      */
     public static void playFromYoutube(String query)
@@ -39,8 +39,8 @@ public class GoogleHandle {
         MainActivity.getContext().startActivity(intent);
     }
     /**
-     * This function will send a mail.
-     * @param
+     * This function will opens a new email.
+     * @param command
      * @return
      */
     public static void sendEmail(String command)

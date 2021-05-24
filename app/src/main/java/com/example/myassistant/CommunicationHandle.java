@@ -11,7 +11,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 /**
- * this class handles all the functions related to sending sms.
+ * This class handles all the functions related to sending SMS && WhatsApp and calling.
  * @author Noa Fatael
  */
 public class CommunicationHandle {
@@ -29,9 +29,9 @@ public class CommunicationHandle {
         pNumber = "";
     }
     /**
-     * This function will send an sms.
+     * This function will send an SMS.
      *
-     * @param
+     * @param command
      * @return
      */
     public static void sendSMS(String command) {
@@ -49,8 +49,8 @@ public class CommunicationHandle {
     /**
      * This function return if this command fits this class.
      *
-     * @param
-     * @return return if this command fits this class.
+     * @param command
+     * @return return if this command fits this command.
      */
     public static boolean isCammandSendSms(String command) {
         return (command.contains("send") && command.contains("sms"));
@@ -58,7 +58,7 @@ public class CommunicationHandle {
     /**
      * This function will extract the phone number from the command if was given.
      *
-     * @param
+     * @param str -> command
      * @return returns phone number from the command or ""
      */
     private static String extractNumber(String str) {
@@ -79,7 +79,7 @@ public class CommunicationHandle {
     /**
      * This function will get the phone number of a contact in the phone.
      *
-     * @param
+     * @param nameIn
      * @return
      */
     private static void getContactpNumber(String nameIn) {
@@ -108,7 +108,7 @@ public class CommunicationHandle {
     /**
      * This function will get from command to who to send the sms.
      *
-     * @param
+     * @param command
      * @return who to send the sms.
      */
     private static String getContactNameFromCommand(String command)
@@ -127,7 +127,7 @@ public class CommunicationHandle {
     /**
      * This function will get from command the content to send.
      *
-     * @param
+     * @param command
      * @return the content to send.
      */
     private static String getMSGCont(String command) {
@@ -146,7 +146,7 @@ public class CommunicationHandle {
     /**
      * This function will call the contact asked.
      *
-     * @param
+     * @param command
      * @return
      */
     public static void callContact(String command)
@@ -177,9 +177,9 @@ public class CommunicationHandle {
         return (command.contains("call"));
     }
     /**
-     * This function will send whatsapp msg
+     * This function will send WhatsApp msg
      *
-     * @param
+     * @param command
      * @return
      */
     public static void sendWhatsapp(String command)
@@ -211,7 +211,7 @@ public class CommunicationHandle {
     /**
      * This function will check if a app is installed on the phone
      *
-     * @param
+     * @param uri
      * @return
      */
     private static boolean isAppInstalled(String uri) {

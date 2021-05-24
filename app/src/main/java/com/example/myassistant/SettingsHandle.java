@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 /**
- * this class handles all the functions settings in the phone: wifi, bluetooth.
+ * This class handles all the functions settings in the phone: bluetooth.
  * @author Noa Fatael
  */
 public class SettingsHandle {
@@ -20,7 +20,7 @@ public class SettingsHandle {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     /**
      * This function will open bluetooth
-     * @param
+     * @param command
      * @return
      */
     public static void bluetoothOn(String command)
@@ -46,16 +46,6 @@ public class SettingsHandle {
         MainActivity.bAdapter.disable();
     }
     /**
-     * This function will switch WiFi status.
-     * @param status wanted.
-     * @return
-     */
-    public static void switchWiFi(boolean status)
-    {
-        WifiManager wifiManager = (WifiManager)MainActivity.getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        wifiManager.setWifiEnabled(status);
-    }
-    /**
      * This function return if this command fits this class.
      * @param command
      * @return return if this command fits this class.
@@ -71,24 +61,7 @@ public class SettingsHandle {
     public static boolean isCammandBluetoothOff(String command){
         return (command.contains("bluetooth") && command.contains("off"));
     }
-    /**
-     * This function return if this command fits this class.
-     * @param command
-     * @return return if this command fits this class.
-     */
-    public static boolean isCammandWifiOn(String command){
-        return (command.contains("wifi") && command.contains("on"));
-    }
-    /**
-     * This function return if this command fits this class.
-     * @param command
-     * @return return if this command fits this class.
-     */
-    public static boolean isCammandWifiOff(String command){
-        return (command.contains("wifi") && command.contains("off"));
-    }
-
-    public static void openSettings()
+    public static void openSettings(String command)
     {
         MainActivity.getContext().startActivity(new Intent(Settings.ACTION_SETTINGS));
     }

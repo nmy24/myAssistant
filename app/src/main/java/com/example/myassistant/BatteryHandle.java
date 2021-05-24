@@ -4,7 +4,7 @@ import android.content.IntentFilter;
 import android.os.BatteryManager;
 
 /**
- * this class handles all the functions related to phone battery.
+ * This class handles all the functions related to phone battery.
  * @author Noa Fatael
  */
 public class BatteryHandle {

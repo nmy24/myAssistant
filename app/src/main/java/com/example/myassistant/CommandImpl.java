@@ -9,15 +9,21 @@ import androidx.annotation.RequiresApi;
 import java.util.HashMap;
 
 /**
- * this class call commandes via user wish.
+ * This class will call the commands via user wish.
  * @author Noa Fatael
  */
 public class CommandImpl {
-    private HashMap<HandleCheckFunction, CommandHandler> myMap;
+    private HashMap<HandleCheckFunction, CommandHandler> myMap;//this hash map will contain all the command checkers and handles.
+    /**
+     * This C'tor will init the hash map that contains all the command checkers and handles.
+     * @param
+     * @return
+     */
     CommandImpl()
     {
         HandleCheckFunction sayCheck = command -> command.contains("say");
-        CommandHandler sayCommandHandler = command -> MainActivity.tts.talk(command.substring("say ".length()));
+        HandleCheckFunction isOpenSettings = command -> command.contains("open") && command.contains("setting");
+
 
         myMap = new HashMap<>();
 
@@ -38,7 +44,7 @@ public class CommandImpl {
         myMap.put(TimeHandle::isCammandGetDay, TimeHandle::sayDay);
         myMap.put(TimeHandle::isCammandGetDate, TimeHandle::sayDate);
         myMap.put(TimeHandle::isCammandGetYear, TimeHandle::sayYear);
-        myMap.put(sayCheck, sayCommandHandler);
+        myMap.put(isOpenSettings, SettingsHandle::openSettings);
 
     }
     /**
@@ -56,16 +62,6 @@ public class CommandImpl {
                 myMap.get(handleCheckFunction).handleCommand(command);
             }
         }
-        /*
-        else if(SettingsHandle.isCammandWifiOff(command))
-        {
-            SettingsHandle.switchWiFi(SettingsHandle.WIFI_OFF);
-        }
-        else if(SettingsHandle.isCammandWifiOn(command))
-        {
-            SettingsHandle.switchWiFi(SettingsHandle.WIFI_ON);
-        }
-     */
 
     }
 }

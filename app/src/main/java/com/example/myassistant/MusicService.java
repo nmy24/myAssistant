@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import java.util.Random;
 
 /**
- * this is the music service.
+ * This is the music service.
  * @author Noa Fatael
  */
 public class MusicService extends Service {
@@ -26,7 +26,7 @@ public class MusicService extends Service {
 
     @Override
     /**
-     * This function create the music service.
+     * This function creates the music service.
      * @param
      * @return
      */
@@ -39,7 +39,7 @@ public class MusicService extends Service {
     @Override
     /**
      * This function start the service.
-     * @param
+     * @param intent, flags, startId
      * @return
      */
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -70,7 +70,7 @@ public class MusicService extends Service {
     }
     /**
      * This function will start the music sevice.
-     * @param
+     * @param command
      * @return
      */
     public static void startMusicSer(String command)
@@ -81,10 +81,10 @@ public class MusicService extends Service {
     }
     /**
      * This function will stop the music sevice.
-     * @param
+     * @param command
      * @return
      */
-    public static void stopMusicSer(String coomand)
+    public static void stopMusicSer(String command)
     {
         MainActivity.getContext().stopService(MainActivity.musicIntent);
     }

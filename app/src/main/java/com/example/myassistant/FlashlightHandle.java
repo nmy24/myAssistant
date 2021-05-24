@@ -10,7 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 /**
- * this class handles all the functions related to flashlight .
+ * This class handles all the functions related to flashlight.
  * @author Noa Fatael
  */
 public class FlashlightHandle {
@@ -48,7 +48,7 @@ public class FlashlightHandle {
     @RequiresApi(api = Build.VERSION_CODES.M)
     /**
      * This function will switch the flashLight mode
-     * @param
+     * @param status
      * @return
      */
     public static void switchFlashLight(String status) {

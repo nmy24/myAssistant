@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- * this the speech to text service.
+ * This the speech to text service.
  * @author Noa Fatael
  */
 public class SttService extends Service {
@@ -107,7 +107,7 @@ public class SttService extends Service {
         return START_STICKY;
     }
     /**
-     * This function will destroy the sevice.
+     * This function will destroy the service.
      * @param
      * @return
      */
@@ -115,11 +115,20 @@ public class SttService extends Service {
     public void onDestroy() {
         super.onDestroy();
     }
-
+    /**
+     * This function make the stt var state on.
+     * @param
+     * @return
+     */
     public static void sttOn()
     {
         isOn = true;
     }
+    /**
+     * This function make the stt var state off.
+     * @param
+     * @return
+     */
     public static void sttOff()
     {
         isOn = false;

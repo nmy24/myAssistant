@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 
 /**
- * this class handles all the functions related to phone camera.
+ * This class handles all the functions related to phone camera.
  * @author Noa Fatael
  */
 public class CameraHandle {

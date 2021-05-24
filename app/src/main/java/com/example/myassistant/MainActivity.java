@@ -26,7 +26,7 @@ import java.text.BreakIterator;
 import java.util.ArrayList;
 
 /**
- * this is the MainActivity class.
+ * This is the MainActivity class.
  * @author Noa Fatael
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NameDialog.NameDialogListener {
@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static ArrayList<Integer> songs;
     public static Intent musicIntent;
     public final static BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
-    private Toast toast;
-    private long lastBackPressTime = 0;
     private static TextView tvOut;
 
     /**
@@ -85,7 +83,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             checkPermission();
         }
     }
-
+    /**
+     * This function init the music array list
+     *
+     * @param
+     * @return
+     */
     private void initMusic()
     {
         //init songs
@@ -153,15 +156,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        /*if (requestCode == RecordAudioRequestCode && grantResults.length > 0) {
-            for (int i = 0; i < grantResults.length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED)
-                    Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
-            }
-        }*/
     }
 
-
+    /**
+     * This will handle a situation when the user taps back and will ask if really wants to leave.
+     *
+     * @param
+     * @return
+     */
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
@@ -184,12 +186,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AlertDialog ad = builder.create();
         ad.show();
     }
-
+    /**
+     * This will open the dialog on the top right screen.
+     *
+     * @param
+     * @return
+     */
     public void openDialog() {
         NameDialog exampleDialog = new NameDialog();
         exampleDialog.show(getSupportFragmentManager(), "example dialog");
     }
-
+    /**
+     * This will change the assistant name in the Shared Preferences
+     *
+     * @param
+     * @return
+     */
     @Override
     public void applyTexts(String name) {
         SharedPreferences pref = getApplicationContext().getSharedPreferences(FILENAME, 0); // 0 - for private mode
@@ -198,14 +210,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.commit(); // commit changes
 
     }
-
+    /**
+     * This will create the option menu on the top right screen
+     *
+     * @param
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
 
     }
-
+    /**
+     * The function will handle which item that was selected
+     *
+     * @param item
+     * @return true
+     */
     public boolean onOptionsItemSelected(MenuItem item)
     {
         int id = item.getItemId();
@@ -216,16 +238,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //goto about screen
                 startActivity(new Intent(this, about_activity.class));
                 break;
-            case R.id.settings:
-                SettingsHandle.openSettings();
-                break;
             case R.id.assistant_name:
                 openDialog();
                 break;
         }
         return true;
     }
-
+    /**
+     * This will change the output log on the screen to what the user says.
+     *
+     * @param sayed - what the user sayed.
+     * @return
+     */
     public static void changeOutput(String sayed)
     {
         tvOut.setText(sayed);

@@ -6,7 +6,7 @@ import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
 /**
- * this class handles all the functions related to time.
+ * This class handles all the functions related to time.
  * @author Noa Fatael
  */
 public class TimeHandle {
@@ -18,12 +18,14 @@ public class TimeHandle {
     private static final int YEAR = 5;
     /**
      * This function will get the command and say the time.
-     * @param
+     * @param command
      * @return
      */
     public static void sayTime(String command)
     {
+        SttService.sttOff();
         MainActivity.tts.talk(getTime());
+        SttService.sttOn();
     }
     /**
      * This function will return the time RN.
@@ -37,12 +39,14 @@ public class TimeHandle {
     }
     /**
      * This function will get the command and say the day.
-     * @param
+     * @param command
      * @return
      */
     public static void sayDay(String command)
     {
-        MainActivity.tts.talk(getDay());
+        SttService.sttOff();
+        MainActivity.tts.talk(getDay() + "day");
+        SttService.sttOn();
     }
     /**
      * This function will return the day RN.
@@ -60,8 +64,10 @@ public class TimeHandle {
      * @return
      */
     public static void sayDate(String s) {
+        SttService.sttOff();
         updateTime();
         MainActivity.tts.talk(currentTimeArr[MONTH_DAY] + " of " + currentTimeArr[MONTH]);
+        SttService.sttOn();
     }
     /**
      * This function will get the command and say the year.
@@ -70,7 +76,9 @@ public class TimeHandle {
      */
     public static void sayYear(String command)
     {
+        SttService.sttOff();
         MainActivity.tts.talk(getYear());
+        SttService.sttOn();
     }
     /**
      * This function will return the year.

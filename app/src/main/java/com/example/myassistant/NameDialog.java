@@ -10,11 +10,19 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
-
+/**
+ * This is the NameDialog class.
+ * Will make the mame dialog on the screen.
+ * @author Noa Fatael
+ */
 public class NameDialog extends AppCompatDialogFragment {
     private EditText nameIn;
     private NameDialogListener listener;
-
+    /**
+     * This function create the dialog.
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

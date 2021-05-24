@@ -2,10 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">   
     <item
         android:id="@+id/about"
-    android:title="About" />    
-    <item
-        android:id="@+id/settings"
-        android:title="Settings" />
+    android:title="About" /><![CDATA[    
+    ]]>
     <item
         android:id="@+id/assistant_name"
         android:title="Assistant Name" />

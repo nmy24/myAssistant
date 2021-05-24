@@ -9,7 +9,7 @@ import android.util.Log;
 import java.util.Locale;
 
 /**
- * this is text to speech class.
+ * This is text to speech class.
  * @author Noa Fatael
  */
 public class TTS_Manager {
