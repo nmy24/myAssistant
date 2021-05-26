@@ -16,8 +16,8 @@ import android.widget.Toast;
  */
 public class CommunicationHandle {
     public static boolean isInCall;
-    static SmsManager smsManager;
-    static String pNumber;
+    private static SmsManager smsManager;
+    private static String pNumber;
     /**
      * This function will init the class vars.
      *

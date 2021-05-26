@@ -1,0 +1,92 @@
+Folder PATH listing
+Volume serial number is 467B-EC84
+C:.
+³   AndroidManifest.xml
+³   ic_launcher-playstore.png
+³   tree.txt
+³   
+ÃÄÄÄjava
+³   ÀÄÄÄcom
+³       ÀÄÄÄexample
+³           ÀÄÄÄmyassistant
+³                   about_activity.java
+³                   BatteryHandle.java
+³                   CameraHandle.java
+³                   CommandHandler.java
+³                   CommandImpl.java
+³                   CommunicationHandle.java
+³                   FlashlightHandle.java
+³                   GoogleHandle.java
+³                   HandleCheckFunction.java
+³                   loading_screen.java
+³                   MainActivity.java
+³                   MusicService.java
+³                   NameDialog.java
+³                   SettingsHandle.java
+³                   SttService.java
+³                   TimeHandle.java
+³                   TTS_Manager.java
+³                   
+ÀÄÄÄres
+    ÃÄÄÄdrawable
+    ³       about.png
+    ³       ic_launcher_background.xml
+    ³       logo.png
+    ³       screen.png
+    ³       
+    ÃÄÄÄdrawable-v24
+    ³       ic_launcher_foreground.xml
+    ³       
+    ÃÄÄÄlayout
+    ³       activity_about_activity.xml
+    ³       activity_loading_screen.xml
+    ³       activity_main.xml
+    ³       layout_dialog.xml
+    ³       
+    ÃÄÄÄmenu
+    ³       main_menu.xml
+    ³       
+    ÃÄÄÄmipmap-anydpi-v26
+    ³       ic_launcher.xml
+    ³       ic_launcher_round.xml
+    ³       
+    ÃÄÄÄmipmap-hdpi
+    ³       ic_launcher.png
+    ³       ic_launcher_foreground.png
+    ³       ic_launcher_round.png
+    ³       
+    ÃÄÄÄmipmap-mdpi
+    ³       ic_launcher.png
+    ³       ic_launcher_foreground.png
+    ³       ic_launcher_round.png
+    ³       
+    ÃÄÄÄmipmap-xhdpi
+    ³       ic_launcher.png
+    ³       ic_launcher_foreground.png
+    ³       ic_launcher_round.png
+    ³       
+    ÃÄÄÄmipmap-xxhdpi
+    ³       ic_launcher.png
+    ³       ic_launcher_foreground.png
+    ³       ic_launcher_round.png
+    ³       
+    ÃÄÄÄmipmap-xxxhdpi
+    ³       ic_launcher.png
+    ³       ic_launcher_foreground.png
+    ³       ic_launcher_round.png
+    ³       
+    ÃÄÄÄraw
+    ³       a.mp3
+    ³       b.mp3
+    ³       c.mp3
+    ³       d.mp3
+    ³       e.mp3
+    ³       f.mp3
+    ³       g.mp3
+    ³       
+    ÀÄÄÄvalues
+            colors.xml
+            ic_launcher_background.xml
+            strings.xml
+            styles.xml
+            

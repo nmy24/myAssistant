@@ -31,5 +31,4 @@ public class loading_screen extends AppCompatActivity {
             }
         }, SPLASH_TIME);
     }
-
 }
