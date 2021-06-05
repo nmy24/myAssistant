@@ -18,6 +18,8 @@ public class GoogleHandle {
      */
     public static void searchGoogleQuery(String query)
     {
+        query = query.replace("google", "");
+        query = query.substring(1);
         query = query.substring(("search in google ").length(), query.length());
         MainActivity.tts.talk("searching");
         Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
@@ -32,6 +34,7 @@ public class GoogleHandle {
      */
     public static void playFromYoutube(String query)
     {
+        query = query.replace("youtube", "");
         query = query.substring(("search in youtube ").length(), query.length());
         MainActivity.tts.talk("searching");
         Intent intent = new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.youtube.com/search?q="+query));
